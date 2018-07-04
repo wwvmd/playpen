@@ -13,3 +13,7 @@ curl localhost:8083/connectors
 
 
  curl -X POST -H "Content-Type: application/json" -d @/home/ash/connect-cassandra-source_bulk.json localhost:8083/connectors
+
+
+ $KAFKA_HOME/bin/kafka-console-consumer.sh --zookeeper localhost:2181           --topic employees_input              --formatter kafka.tools.DefaultMessageFormatter           --property print.key=true
+        --property key.deserializer=org.apache.kafka.common.serialization.StringDeserializer           --property value.deserializer=org.apache.kafka.common.serialization.StringDeserializer --from-beginning
