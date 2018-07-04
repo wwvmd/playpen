@@ -1,0 +1,12 @@
+List all connectors
+--------------------
+curl localhost:8083/connectors
+
+Pause:
+curl -XPUT localhost:8083/connectors/employees_source/pause
+
+
+curl -XPUT localhost:8083/connectors/employees_source/pause
+curl -XDELETE localhost:8083/connectors/employees_source
+curl -XDELETE localhost:8083/connectors/elasticsearch-sink
+curl localhost:8083/connectors
