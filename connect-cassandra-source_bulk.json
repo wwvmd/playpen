@@ -1,0 +1,17 @@
+{
+	"name": "employees_input_source_bulk",
+	"config": {
+		"tasks.max": "1",
+		"connector.class": "com.datamountaineer.streamreactor.connect.cassandra.source.CassandraSourceConnector",
+		"connect.cassandra.contact.points": "10.0.0.2",
+		"connect.cassandra.port": 9042,
+		"connect.cassandra.username": "cassandra",
+		"connect.cassandra.password": "cassandra",
+		"connect.cassandra.consistency.level": "LOCAL_ONE",
+		"connect.cassandra.key.space": "hr",
+
+		"connect.cassandra.import.mode": "bulk",
+		"connect.cassandra.kcql": "INSERT INTO employees_input SELECT attributes, last_modified_timeuuid FROM employees IGNORE last_modified_timeuuid PK last_modified_timeuuid WITHUNWRAP INCREMENTALMODE=TIMEUUID WITHKEY (empid)",
+    		"connect.cassandra.import.poll.interval": 60000
+	}
+}
