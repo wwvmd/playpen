@@ -1,0 +1,37 @@
+CREATE KEYSPACE hr
+  WITH REPLICATION = { 'class' : 'SimpleStrategy', 'replication_factor' : 1 };
+  
+./cqlsh 192.168.56.101 9042 -u cassandra -p cassandra
+
+
+
+
+empId, attributes, checksum
+------------------------------------------------------------------------
+
+./cqlsh 192.168.56.101 9042 -u cassandra -p cassandra
+
+
+CREATE TABLE employees (
+  empId text PRIMARY KEY,
+  attributes text,
+  checksum bigint,
+  last_modified timeuuid
+);
+
+
+CREATE TABLE employees  (
+	empid text,
+	attributes text,
+	checksum text,
+	last_modified_timestamp timestamp,  // notused but good for seeing human readable time
+	last_modified_timeuuid timeuuid,
+	PRIMARY KEY (empid)
+)
+
+INSERT INTO employees (empId, attributes, checksum, last_modified)
+  VALUES ('1', '{ "name":"Ash Goel", "rank":"Director"}', 5, now());
+  
+select * from employees;
+
+UPDATE employees  set attributes='{ "name":"Joe Bloggs", "rank":"Director"}', checksum=6, last_modified=now() where empId='1'  if checksum != 6;
